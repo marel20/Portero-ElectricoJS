@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Portero Electrico</title>
+</head>
+<body>
+
+    <section>
+        <article id="visor1">
+            <input class="visores" type="text" size="10" id="piso" value="" />
+            <input class="visores" type="text" size="10" id="depto" value="" />
+        </article>
+        <article id="numeros">
+            <div class="numeros1">
+                <input class="button" type="button"  value="1" onclick="marcar(1)" /> <br>
+                <input class="button" type="button"  value="4" onclick="marcar(4)" /> <br>
+                <input class="button" type="button"  value="7" onclick="marcar(7)" /> <br>
+                <input class="button" type="button"  value="0" onclick="marcar(0)" /> <br>
+            </div>
+            <div class="numeros2">
+                <input class="button" type="button"  value="2" onclick="marcar(2)" /> <br>
+                <input class="button" type="button"  value="5" onclick="marcar(5)" /> <br>
+                <input class="button" type="button"  value="8" onclick="marcar(8)" /> <br>
+                <input class="button" type="button" value="Llamar" onclick="Llamar()" /> <br>
+            </div>        
+            <div class="numeros3">
+                <input class="button" type="button"  value="3" onclick="marcar(3)" /> <br>
+                <input class="button" type="button"  value="6" onclick="marcar(6)" /> <br>
+                <input class="button" type="button"  value="9" onclick="marcar(9)" /> <br>
+                <input class="button" type="button" value="Borrar" onclick="Borrar()" /> <br>
+            </div>
+        </article>
+        <article id="visor2">
+            <input class="visores" type="text" size="40" id="mensaje" value="" />
+        </article>
+    </section>
+
+
+    <script>
+        
+        function marcar(numero) {
+           console.log("Marcar el " + numero);
+           ValorPiso = document.getElementById('piso').value;
+           LargoPiso = ValorPiso.length;
+           ValorDepto = document.getElementById('depto').value;
+           LargoDepto = ValorDepto.length;
+           LargoTotal = LargoPiso+LargoDepto;
+
+           switch (LargoTotal) {
+               case 0:
+                    document.getElementById('piso').value = numero;
+                    break
+                case 1:
+                    document.getElementById('piso').value = document.getElementById('piso').value + numero;
+                    break
+                case 2:
+                    document.getElementById('depto').value = numero;
+                    break
+                default:
+                    //segui tocando hasta que te canses que no va a salir nada..
+           }
+       }
+
+       function Llamar() {
+           console.log("En Llamar");
+           ValorPiso = document.getElementById('piso').value;
+           ValorDepto = document.getElementById('depto').value;
+           var mensajeOK = "" , mensajeError = "";
+           if (ValorPiso>=0 && ValorPiso<=42) {
+               // piso OK
+               mensajeOK += "Llamando al piso " + ValorPiso;
+           } else {
+               //error en el piso
+               mensajeError += "Los pisos van del 00 al 42 ";
+           }
+           if (ValorDepto>=1 && ValorDepto <=8) {
+               // depto ok
+               mensajeOK += " - Depto " + ValorDepto;
+           } else {
+               //error en el depto
+               mensajeError += "Los departamentos van del 1 al 8";
+           }
+           if (mensajeError == "") {
+               //esta todo ok
+               document.getElementById('mensaje').value = mensajeOK;
+           } else {
+               document.getElementById('mensaje').value = mensajeError;
+           }
+       }
+       
+       function Borrar() {
+           console.log("En Borrar");
+           document.getElementById('mensaje').value = "";
+           document.getElementById('depto').value = "";
+           document.getElementById('piso').value = "";
+       }
+
+    </script>
+
+
+
+</body>
+</html>
